@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div class="container">
+
+   
+    <button class="geoBtn">Show User Location</button>
+<p class="show">User Location details</p>
+<p class="fullAddress">User address</p>
+<p class="formatteAddress">User Address</p>    
+
+</div>
+<script>
+    const fullAddress=document.querySelector(".fullAddress");
+    const show=document.querySelector(".show");
+    const formatteAddress=document.querySelector(".formatteAddress");
+  let  api_end="https://api.opencagedata.com/geocode/v1/json";
+  let api_key="2d6c564730174bc2928b49a03779da4b";
+const getUser=async (latitude,longitude)=>{
+// console.log(latitude);
+
+let query=`${latitude},${longitude}`;
+let apiUrl=`${api_end}?key=${api_key}&q=${query}&pretty=1`;
+try{
+    const res=await fetch(apiUrl);
+    const data=await res.json();
+    console.log(data);
+    const{city,state,postcode,country}=data.results[0].components;
+    fullAddress.textContent=`User address:${city},${postcode},${state},${country}`;
+    formatteAddress.textContent=`User full address:${data.results[0].formatted}`;
+}catch(error)
+{
+    console.log(error);
+}
+
+};
+document.querySelector(".geoBtn").addEventListener("click",()=>{
+    if(navigator.geolocation)
+{
+    navigator.geolocation.getCurrentPosition(
+        (position)=>{
+const {latitude,longitude}=position.coords;
+show.textContent=`the latitude ${latitude} & longitude ${longitude}`
+  getUser(latitude,longitude);
+},
+
+    (error)=>{
+show.textContent=error.message;
+    }
+);
+
+}
+})
+
+
+
+</script>
+</body>
+
+</html>

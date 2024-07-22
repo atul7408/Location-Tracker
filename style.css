@@ -1,0 +1,41 @@
+*{
+  
+    margin: 0%;
+    padding:0px;
+  
+}
+body{
+    background-color: aquamarine;
+
+}
+
+.container{
+
+    width: 50vw;
+    height: 50vh;
+   background-color: rgb(93, 27, 180);
+   position: absolute;
+   left:50%;
+   top:50%;
+   transform: translate(-50%,-50%);
+   border:1px solid;
+   border-radius: 5px;
+
+}
+
+.geoBtn{
+color: rgba(0, 2, 2, 0.893);
+display: block;
+margin: auto;
+
+border-radius: 5%;
+background-color: bisque;
+
+
+}
+.geoBtn:hover{
+    color:rgb(235, 7, 48);
+}
+div p{
+    color: rgb(66, 218, 28);
+}
